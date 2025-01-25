@@ -123,15 +123,23 @@ const (
 	Status = "APIStateRequest"
 )
 
-type MessageBase struct {
+type RequestMessageBase struct {
 	ApiName     string `json:"apiName"`
 	ApiVersion  string `json:"apiVersion"`
 	RequestID   string `json:"requestID"`
 	MessageType string `json:"messageType"`
 }
 
+type RespondMessageBase struct {
+	ApiName     string `json:"apiName"`
+	ApiVersion  string `json:"apiVersion"`
+	Timestamp   int64  `json:"timestamp"`
+	RequestID   string `json:"requestID"`
+	MessageType string `json:"messageType"`
+}
+
 type StatusRequest struct {
-	MessageBase
+	RequestMessageBase
 }
 
 type StatusResponseData struct {
@@ -141,8 +149,7 @@ type StatusResponseData struct {
 }
 
 type StatusResponse struct {
-	MessageBase
-	timestamp          uint64             `json:"timestamp"`
+	RespondMessageBase
 	StatusResponseData StatusResponseData `json:"data"`
 }
 
@@ -152,6 +159,78 @@ type AuthenticationRequestData struct {
 	PluginIcon      string `json:"pluginIcon"`
 }
 type AuthenticationRequest struct {
-	MessageBase
+	RequestMessageBase
 	AuthenticationRequestData AuthenticationRequestData `json:"authenticationRequestData"`
+}
+
+type AuthenticationResponseData struct {
+	Authenticated bool   `json:"authenticated"`
+	Reason        string `json:"reason"`
+}
+type AuthenticationResponse struct {
+	RespondMessageBase
+	AuthenticationResponseData AuthenticationResponseData `json:"data"`
+}
+
+type StatisticsRequest struct {
+	RespondMessageBase
+}
+type StatisticsRespondData struct {
+	Uptime              uint32  `json:"uptime"`
+	FrameRate           float32 `json:"frameRate"`
+	VtuberStudioVersion string  `json:"vtuberStudioVersion"`
+	AllowedPlugins      uint16  `json:"allowedPlugins"`
+	ConnectedPlugins    uint16  `json:"connectedPlugins"`
+	StartedWithSteam    bool    `json:"startedWithSteam"`
+	WindowWidth         uint16  `json:"windowWidth"`
+	WindowHeight        uint16  `json:"windowHeight"`
+	WindowIsFullscreen  bool    `json:"windowIsFullscreen"`
+}
+
+type StatisticsResponse struct {
+	RespondMessageBase
+	StatisticsRequestData StatisticsRequest `json:"data"`
+}
+
+type VTSFolderInfoRequest struct {
+	RequestMessageBase
+}
+
+type VTSFolderInfoResponseData struct {
+	Model      string `json:"model"`
+	Background string `json:"background"`
+	Items      string `json:"items"`
+	Config     string `json:"config"`
+	Logs       string `json:"logs"`
+	Backup     string `json:"backup"`
+}
+
+type VTSFolderInfoResponse struct {
+	RespondMessageBase
+	VTSFolderInfoResponseData VTSFolderInfoResponseData `json:"data"`
+}
+
+type CurrentModelRequest struct {
+	RequestMessageBase
+}
+type CurrentModelResponseData struct {
+	ModelLoaded              bool          `json:"modelLoaded"`
+	ModelName                string        `json:"modelName"`
+	ModelID                  string        `json:"modelID"`
+	VtsModelName             string        `json:"vtsModelName"`
+	VtsModelIconName         string        `json:"vtsModelIconName"`
+	Live2DModelName          string        `json:"live2DModelName"`
+	ModelLoadTime            uint32        `json:"modelLoadTime"`
+	TimeSinceModelLoaded     uint32        `json:"timeSinceModelLoaded"`
+	NumberOfLive2DParameters uint16        `json:"numberOfLive2DParameters"`
+	NumberOfLive2DArtmeshes  uint16        `json:"numberOfLive2DArtmeshes"`
+	HasPhysicsFile           bool          `json:"hasPhysicsFile"`
+	NumberOfTextures         uint16        `json:"numberOfTextures"`
+	TextureResolution        uint16        `json:"textureResolution"`
+	ModelPosition            ModelPosition `json:"modelPosition"`
+}
+
+type CurrentModelResponse struct {
+	RespondMessageBase
+	CurrentModelResponseData CurrentModelResponseData `json:"data"`
 }
