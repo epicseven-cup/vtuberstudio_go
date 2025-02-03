@@ -330,7 +330,7 @@ type HotkeyTriggerResponse struct {
 }
 
 type ExpressionStateRequestData struct {
-	Details bool `json:"details"`
+	Details    bool   `json:"details"`
 	Expression string `json:"expression"`
 }
 type ExpressionStateRequest struct {
@@ -339,9 +339,9 @@ type ExpressionStateRequest struct {
 }
 
 type ExpressionStateResponseData struct {
-	ModelLoaded bool `json:"modelLoaded"`
-	ModelName   string `json:"modelName"`
-	ModelID     string `json:"modelID"`
+	ModelLoaded bool         `json:"modelLoaded"`
+	ModelName   string       `json:"modelName"`
+	ModelID     string       `json:"modelID"`
 	Expressions []Expression `json:"expressions"`
 }
 
@@ -351,9 +351,9 @@ type ExpressionStateResponse struct {
 }
 
 type ExpressionActivationRequestData struct {
-	ExpressionFile string `json:"expressionFile"`
-	FadeTime        float32 `json:"fadeTime"`
-	Active          bool    `json:"active"`
+	ExpressionFile string  `json:"expressionFile"`
+	FadeTime       float32 `json:"fadeTime"`
+	Active         bool    `json:"active"`
 }
 
 type ExpressionActivationRequest struct {
@@ -361,7 +361,7 @@ type ExpressionActivationRequest struct {
 	ExpressionActivationRequestData ExpressionActivationRequestData `json:"data"`
 }
 
-type ExpressionActivationResponseData struct {}
+type ExpressionActivationResponseData struct{}
 
 type ExpressionActivationResponse struct {
 	RespondMessageBase
@@ -373,11 +373,11 @@ type ArtMeshListRequest struct {
 }
 
 type ArtMeshListResponseData struct {
-	ModelLoaded bool `json:"modelLoaded"`
-	NumberOfArtMeshNames uint16 `json:"numberOfArtMeshNames"`
-	NumberOfArtMeshTags uint16 `json:"numberOfArtMeshTags"`
-	ArtMeshNames []string `json:"artMeshNames"`
-	ArtMeshTags []string `json:"artMeshTags"`
+	ModelLoaded          bool     `json:"modelLoaded"`
+	NumberOfArtMeshNames uint16   `json:"numberOfArtMeshNames"`
+	NumberOfArtMeshTags  uint16   `json:"numberOfArtMeshTags"`
+	ArtMeshNames         []string `json:"artMeshNames"`
+	ArtMeshTags          []string `json:"artMeshTags"`
 }
 
 type ArtMeshListResponse struct {
@@ -385,24 +385,24 @@ type ArtMeshListResponse struct {
 	ArtMeshListResponseData ArtMeshListResponseData `json:"data"`
 }
 
-type ColorTint {
-	ColorR uint8 `json:"colorR"`
-	ColorG uint8 `json:"colorG"`
-	ColorB uint8 `json:"colorB"`
-	ColorA uint8 `json:"colorA"`
+type ColorTint struct {
+	ColorR                    uint8 `json:"colorR"`
+	ColorG                    uint8 `json:"colorG"`
+	ColorB                    uint8 `json:"colorB"`
+	ColorA                    uint8 `json:"colorA"`
 	MixWithSceneLightingColor uint8 `json:"mixWithSceneLightingColor"`
 }
 
-type ArtMeshMatcher struct{
-	TintAll bool `json:"tintAll"`
-	ArtMeshNumber []uint8 `json:"artMeshNumber"`
-	NameExact []string `json:"nameExact"`
-	TagExact []string `json:"tagExact"`
-	TagContains []string `json:"tagContains"`
+type ArtMeshMatcher struct {
+	TintAll       bool     `json:"tintAll"`
+	ArtMeshNumber []uint8  `json:"artMeshNumber"`
+	NameExact     []string `json:"nameExact"`
+	TagExact      []string `json:"tagExact"`
+	TagContains   []string `json:"tagContains"`
 }
 
-type ColorTintRequestData struct{
-	ColorTint ColorTint  `json:"colorTint"`
+type ColorTintRequestData struct {
+	ColorTint      ColorTint      `json:"colorTint"`
 	ArtMeshMatcher ArtMeshMatcher `json:"artMeshMatcher"`
 }
 
@@ -411,7 +411,7 @@ type ColorTintRequest struct {
 	ColorTintRequestData ColorTintRequestData `json:"data"`
 }
 
-type ColorTintResponseData struct{
+type ColorTintResponseData struct {
 	MatchedArtMeshes uint8 `json:"matchedArtMeshes"`
 }
 
@@ -420,31 +420,30 @@ type ColorTintResponse struct {
 	ColorTintResponseData ColorTintResponseData `json:"data"`
 }
 
-type SceneColorOverlayInfoRequest struct{
+type SceneColorOverlayInfoRequest struct {
 	RequestMessageBase
 }
 
-type CapturePart struct{
-	Active bool `json:"active"`
+type CapturePart struct {
+	Active bool  `json:"active"`
 	ColorR uint8 `json:"colorR"`
 	ColorG uint8 `json:"colorG"`
 	ColorB uint8 `json:"colorB"`
 }
 
-type SceneColorOverlayInfoResponseData struct{
-	Active bool `json:"active"`
-	ItemsIncluded bool `json:"itemsIncluded"`
-	IsWindowCapture bool `json:"isWindowCapture"`
-	BaseBrightness uint16 `json:"baseBrightness"`
-	ColorBoost uint16 `json:"colorBoost"`
-	Smoothing uint16 `json:"smoothing"`
-	ColorOverlayR uint16 `json:"colorOverlayR"`
-	ColorOverlayG uint16 `json:"colorOverlayG"`
-	ColorOverlayB uint16 `json:"colorOverlayB"`
-	LeftCapturePart CapturePart `json:"leftCapturePart"`
+type SceneColorOverlayInfoResponseData struct {
+	Active            bool        `json:"active"`
+	ItemsIncluded     bool        `json:"itemsIncluded"`
+	IsWindowCapture   bool        `json:"isWindowCapture"`
+	BaseBrightness    uint16      `json:"baseBrightness"`
+	ColorBoost        uint16      `json:"colorBoost"`
+	Smoothing         uint16      `json:"smoothing"`
+	ColorOverlayR     uint16      `json:"colorOverlayR"`
+	ColorOverlayG     uint16      `json:"colorOverlayG"`
+	ColorOverlayB     uint16      `json:"colorOverlayB"`
+	LeftCapturePart   CapturePart `json:"leftCapturePart"`
 	MiddleCapturePart CapturePart `json:"middleCapturePart"`
-	RightCapturePart CapturePart `json:"rightCapturePart"`
-
+	RightCapturePart  CapturePart `json:"rightCapturePart"`
 }
 
 type SceneColorOverlayInfoResponse struct {
@@ -452,8 +451,7 @@ type SceneColorOverlayInfoResponse struct {
 	SceneColorOverlayInfoResponse SceneColorOverlayInfoResponseData `json:"data"`
 }
 
-
-type FaceFoundRequest struct{
+type FaceFoundRequest struct {
 	RequestMessageBase
 }
 
@@ -466,83 +464,77 @@ type FaceFoundResponse struct {
 	FaceFoundResponseData FaceFoundResponseData `json:"data"`
 }
 
-type InputParameterListRequest struct{
+type InputParameterListRequest struct {
 	RequestMessageBase
 }
 
-type Parameter struct{
-	Name string `json:"name"`
-	AddedBy string `json:"addedBy"`
-	Value int `json:"value"`
-	Min int `json:"min"`
-	Max int `json:"max"`
-	DefaultValue int `json:"defaultValue"`
+type Parameter struct {
+	Name         string `json:"name"`
+	AddedBy      string `json:"addedBy"`
+	Value        int    `json:"value"`
+	Min          int    `json:"min"`
+	Max          int    `json:"max"`
+	DefaultValue int    `json:"defaultValue"`
 }
 
-
-type InputParameterListResponseData struct{
-	ModelLoaded bool `json:"modelLoaded"`
-	ModelName string `json:"modelName"`
-	ModelID string `json:"modelID"`
-	CustomParameters []Parameter `json:"customParameters"`
+type InputParameterListResponseData struct {
+	ModelLoaded       bool        `json:"modelLoaded"`
+	ModelName         string      `json:"modelName"`
+	ModelID           string      `json:"modelID"`
+	CustomParameters  []Parameter `json:"customParameters"`
 	DefaultParameters []Parameter `json:"defaultParameters"`
 }
 
-type InputParameterListResponse struct{
+type InputParameterListResponse struct {
 	RespondMessageBase
-	InputParameterListResponseData InputParameterListResponseData`json:"data"`
+	InputParameterListResponseData InputParameterListResponseData `json:"data"`
 }
 
-
-type ParameterValueRequestData struct{
+type ParameterValueRequestData struct {
 	Name string `json:"name"`
 }
 
-type ParameterValueRequest struct{
+type ParameterValueRequest struct {
 	RequestMessageBase
 	ParameterValueRequestData ParameterValueRequestData `json:"data"`
 }
 
-type ParameterValueResponseData struct{
-	Name string `json:"name"`
-	AddedBy string `json:"addedBy"`
-	Value int `json:"value"`
-	Min int `json:"min"`
-	Max int `json:"max"`
-	DefaultValue int `json:"defaultValue"`
+type ParameterValueResponseData struct {
+	Name         string `json:"name"`
+	AddedBy      string `json:"addedBy"`
+	Value        int    `json:"value"`
+	Min          int    `json:"min"`
+	Max          int    `json:"max"`
+	DefaultValue int    `json:"defaultValue"`
 }
 
-type ParameterValueResponse struct{
+type ParameterValueResponse struct {
 	RespondMessageBase
 	ParameterValueResponseData ParameterValueResponseData `json:"data"`
 }
 
-
-type Live2DParameterListRequest struct{
+type Live2DParameterListRequest struct {
 	RequestMessageBase
 }
 
-
-type Live2DParameterListResponseData struct{
-	ModelLoaded bool `json:"modelLoaded"`
-	ModelName string `json:"modelName"`
-	ModelID string `json:"modelID"`
-	Parameters []Parameter `json:"parameters"`
-
+type Live2DParameterListResponseData struct {
+	ModelLoaded bool        `json:"modelLoaded"`
+	ModelName   string      `json:"modelName"`
+	ModelID     string      `json:"modelID"`
+	Parameters  []Parameter `json:"parameters"`
 }
 
-type Live2DParameterListResponse struct{
+type Live2DParameterListResponse struct {
 	RespondMessageBase
 	Live2DParameterListResponseData Live2DParameterListResponseData `json:"data"`
 }
 
-
-type ParameterCreationRequestData struct{
+type ParameterCreationRequestData struct {
 	ParameterName string `json:"parameterName"`
-	Explanation string `json:"explanation"`
-	Min int `json:"min"`
-	Max int `json:"max"`
-	DefaultValue int `json:"defaultValue"`
+	Explanation   string `json:"explanation"`
+	Min           int    `json:"min"`
+	Max           int    `json:"max"`
+	DefaultValue  int    `json:"defaultValue"`
 }
 
 type ParameterCreationRequest struct {
@@ -550,75 +542,468 @@ type ParameterCreationRequest struct {
 	ParameterCreationRequestData ParameterCreationRequestData `json:"data"`
 }
 
-type ParameterCreationResponseData struct{
+type ParameterCreationResponseData struct {
 	ParameterName string `json:"parameterName"`
 }
 
-type ParameterCreationResponse struct{
+type ParameterCreationResponse struct {
 	RespondMessageBase
 	ParameterCreationResponseData ParameterCreationResponseData `json:"data"`
 }
 
-
-
-type ParameterDeletionRequestData struct{
+type ParameterDeletionRequestData struct {
 	ParameterName string `json:"parameterName"`
 }
 
-type ParameterDeletionRequest struct{
+type ParameterDeletionRequest struct {
 	RequestMessageBase
 	ParameterDeletionRequestData ParameterDeletionRequestData `json:"data"`
 }
 
-type ParameterDeletionResponseData struct{
+type ParameterDeletionResponseData struct {
 	ParameterName string `json:"parameterName"`
 }
 
-type ParameterDeletionResponse struct{
+type ParameterDeletionResponse struct {
 	RespondMessageBase
 	ParameterDeletionResponseData ParameterDeletionResponseData `json:"data"`
 }
 
+type ParameterValue struct {
+	Id    string  `json:"id"`
+	Value float32 `json:"value"`
+}
 
+type InjectParameterDataRequestData struct {
+	FaceFound       bool             `json:"faceFound"`
+	Model           string           `json:"model"`
+	ParameterValues []ParameterValue `json:"parameterValues"`
+}
 
+type InjectParameterDataRequest struct {
+	RequestMessageBase
+	InjectParameterDataRequestData InjectParameterDataRequestData `json:"data"`
+}
 
+type InjectParameterDataResponseData struct {
+}
 
+type InjectParameterDataResponse struct {
+	RespondMessageBase
+	InjectParameterDataResponseData InjectParameterDataResponseData `json:"data"`
+}
 
+type GetCurrentModelPhysicsRequest struct {
+	RequestMessageBase
+}
 
+type PhysicsGroup struct {
+	GroupID            string  `json:"groupID"`
+	GroupName          string  `json:"groupName"`
+	StrengthMultiplier float32 `json:"strengthMultiplier"`
+	WindMultiplier     float32 `json:"windMultiplier"`
+}
 
+type GetCurrentModelPhysicsResponseData struct {
+	ModelLoaded                  bool           `json:"modelLoaded"`
+	ModelName                    string         `json:"modelName"`
+	ModelID                      string         `json:"modelID"`
+	ModelHasPhysics              bool           `json:"modelHasPhysics"`
+	PhysicsSwitchedOn            bool           `json:"physicsSwitchedOn"`
+	UsingLegacyPhysics           bool           `json:"usingLegacyPhysics"`
+	PhysicsFPSSettings           int            `json:"physicsFPSSettings"`
+	BaseStrength                 int            `json:"baseStrength"`
+	BaseWind                     int            `json:"baseWind"`
+	ApiPhysicsOverrideActive     bool           `json:"apiPhysicsOverrideActive"`
+	ApiPhysicsOverridePluginName string         `json:"apiPhysicsOverridePluginName"`
+	PhysicsGroups                []PhysicsGroup `json:"physicsGroups"`
+}
 
+type SetCurrentModelPhysicsRequestData struct {
+	Id              string  `json:"id"`
+	Value           float32 `json:"value"`
+	SetBaseValue    bool    `json:"setBaseValue"`
+	OverrideSeconds int     `json:"overrideSeconds"`
+}
 
+type SetCurrentModelPhysicsRequest struct {
+	RequestMessageBase
+	SetCurrentModelPhysicsRequestData SetCurrentModelPhysicsRequestData `json:"data"`
+}
 
+type SetCurrentModelPhysicsResponseData struct{}
 
+type SetCurrentModelPhysicsResponse struct {
+	RespondMessageBase
+	SetCurrentModelPhysicsResponseData SetCurrentModelPhysicsResponseData `json:"data"`
+}
 
+type NDIConfigRequestData struct {
+	SetNewConfig        bool `json:"setNewConfig"`
+	NdiActive           bool `json:"ndiActive"`
+	UseNDI5             bool `json:"useNDI5"`
+	UseCustomResolution bool `json:"useCustomResolution"`
+	CustomWidthNDI      int  `json:"customWidthNDI"`
+	CustomHeightNDI     int  `json:"customHeightNDI"`
+}
 
+type NDIConfigRequest struct {
+	RequestMessageBase
+	NDIConfigRequestData NDIConfigRequestData `json:"data"`
+}
 
+type NDIConfigResponseData struct {
+	SetNewConfig        bool `json:"setNewConfig"`
+	NdiActive           bool `json:"ndiActive"`
+	UseNDI5             bool `json:"useNDI5"`
+	UseCustomResolution bool `json:"useCustomResolution"`
+	CustomWidthNDI      int  `json:"customWidthNDI"`
+	CustomHeightNDI     int  `json:"customHeightNDI"`
+}
 
+type NDIConfigResponse struct {
+	RespondMessageBase
+	NDIConfigResponseData NDIConfigResponseData `json:"data"`
+}
 
+type ItemListRequestData struct {
+	IncludeAvailableSpots       bool   `json:"includeAvailableSpots"`
+	IncludeItemInstancesInScene bool   `json:"includeItemInstancesInScene"`
+	IncludeAvailableItemFiles   bool   `json:"includeAvailableItemFiles"`
+	OnlyItemsWithFileName       string `json:"onlyItemsWithFileName"`
+	OnlyItemsWithInstanceID     string `json:"onlyItemsWithInstanceID"`
+}
 
+type ItemListRequest struct {
+	RequestMessageBase
+	ItemListRequestData ItemListRequestData `json:"data"`
+}
 
+type Item struct {
+	FileName        string  `json:"fileName"`
+	InstanceID      string  `json:"instanceID"`
+	Order           int     `json:"order"`
+	Type            string  `json:"type"`
+	Censored        bool    `json:"censored"`
+	Flipped         bool    `json:"flipped"`
+	Locked          bool    `json:"locked"`
+	Smoothing       bool    `json:"smoothing"`
+	Framerate       float32 `json:"framerate"`
+	FrameCount      int     `json:"frameCount"`
+	CurrentFrame    int     `json:"currentFrame"`
+	PinnedToModel   bool    `json:"pinnedToModel"`
+	PinnedModelID   string  `json:"pinnedModelID"`
+	PinnedArtMeshID string  `json:"pinnedArtMeshID"`
+	GroupName       string  `json:"groupName"`
+	SceneName       string  `json:"sceneName"`
+	FromWorkshop    bool    `json:"fromWorkshop"`
+}
 
+type ItemFile struct {
+	FileName    string `json:"fileName"`
+	Type        string `json:"type"`
+	LoadedCount int    `json:"loadedCount"`
+}
 
+type ItemListResponseData struct {
+	ItemsInSceneCount      uint8      `json:"itemsInSceneCount"`
+	TotalItemsAllowedCount uint8      `json:"totalItemsAllowedCount"`
+	CanLoadItemsRightNow   bool       `json:"canLoadItemsRightNow"`
+	AvailableSpots         []int      `json:"availableSpots"`
+	ItemInstancesInScene   []Item     `json:"itemInstancesInScene"`
+	AvailableItemFiles     []ItemFile `json:"availableItemFiles"`
+}
 
+type ItemListResponse struct {
+	RespondMessageBase
+	ItemListResponseData ItemListResponseData `json:"data"`
+}
 
+type ItemLoadRequestData struct {
+	FileName                              string  `json:"fileName"`
+	PositionX                             float32 `json:"positionX"`
+	PositionY                             float32 `json:"positionY"`
+	Size                                  float32 `json:"size"`
+	Rotation                              int     `json:"rotation"`
+	FadeTime                              float32 `json:"fadeTime"`
+	Order                                 int     `json:"order"`
+	FailIfOrderTaken                      bool    `json:"failIfOrderTaken"`
+	Smoothing                             int     `json:"smoothing"`
+	Censored                              bool    `json:"censored"`
+	Flipped                               bool    `json:"flipped"`
+	Locked                                bool    `json:"locked"`
+	UnloadWhenPluginDisconnects           bool    `json:"unloadWhenPluginDisconnects"`
+	CustomDataBase64                      string  `json:"customDataBase64"`
+	CustomDataAskUserFirst                bool    `json:"customDataAskUserFirst"`
+	CustomDataSkipAskingUserIfWhitelisted bool    `json:"customDataSkipAskingUserIfWhitelisted"`
+	CustomDataAskTimer                    int     `json:"customDataAskTimer"`
+}
 
+type ItemLoadRequest struct {
+	RequestMessageBase
+	ItemLoadRequestData ItemLoadRequestData `json:"data"`
+}
 
+type ItemLoadResponseData struct {
+	InstanceID string `json:"instanceID"`
+	FileName   string `json:"fileName"`
+}
 
+type ItemLoadResponse struct {
+	RespondMessageBase
+	ItemLoadResponseData ItemLoadResponseData `json:"data"`
+}
 
+type ItemUnloadRequestData struct {
+	UnloadAllInScenes                             bool     `json:"unloadAllInScenes"`
+	UnloadAllLoadedByThisPlugin                   bool     `json:"unloadAllLoadedByThisPlugin"`
+	AllowUnloadingITemsLoadedByUserOrOtherPlugins bool     `json:"allowUnloadingITemsLoadedByUserOrOtherPlugins"`
+	InstanceIDs                                   []string `json:"instanceIDs"`
+	FileNames                                     []string `json:"fileNames"`
+}
 
+type ItemUnloadRequest struct {
+	RequestMessageBase
+	ItemUnloadRequestData ItemUnloadRequestData `json:"data"`
+}
 
+type UnloadItem struct {
+	InstanceID string `json:"instanceID"`
+	FileName   string `json:"fileName"`
+}
 
+type ItemUnloadResponseData struct {
+	UnloadItems []UnloadItem `json:"unloadItems"`
+}
 
+type ItemUnloadResponse struct {
+	RespondMessageBase
+	ItemUnloadResponseData ItemUnloadResponseData `json:"data"`
+}
 
+type ItemAnimationControlRequestData struct {
+	ItemInstanceID        string `json:"itemInstanceID"`
+	FrameRate             int    `json:"frameRate"`
+	Frame                 int    `json:"frame"`
+	Brightness            int    `json:"brightness"`
+	Opacity               int    `json:"opacity"`
+	SetAutoStopFrames     bool   `json:"setAutoStopFrames"`
+	AutoStopFrames        []int  `json:"autoStopFrames"`
+	SetAnimationPlayState bool   `json:"setAnimationPlayState"`
+	AnimationPlayState    bool   `json:"animationPlayState"`
+}
 
+type ItemAnimationControlRequest struct {
+	RequestMessageBase
+	ItemAnimationControlRequestData ItemAnimationControlRequestData `json:"data"`
+}
 
+type ItemAnimationControlResponseData struct {
+	Frame            int  `json:"frame"`
+	AnimationPlaying bool `json:"animationPlaying"`
+}
 
+type ItemAnimationControlResponse struct {
+	RespondMessageBase
+	ItemAnimationControlResponseData ItemAnimationControlResponseData `json:"data"`
+}
 
+type ItemToMove struct {
+	ItemInstanceID string  `json:"itemInstanceID"`
+	TimeInSeconds  int     `json:"timeInSeconds"`
+	FadeMode       string  `json:"fadeMode"`
+	PositionX      float32 `json:"positionX"`
+	PositionY      float32 `json:"positionY"`
+	Size           float32 `json:"size"`
+	Rotation       int     `json:"rotation"`
+	Order          int     `json:"order"`
+	SetFilp        bool    `json:"setFilp"`
+	Flip           bool    `json:"flip"`
+	UserCanStop    bool    `json:"userCanStop"`
+}
 
+type ItemMoveRequestData struct {
+	ItemsToMove []ItemToMove `json:"itemsToMove"`
+}
 
+type ItemMoveRequest struct {
+	RequestMessageBase
+	ItemMoveRequestData ItemMoveRequestData `json:"data"`
+}
 
+type MovedItem struct {
+	ItemInstanceID string `json:"itemInstanceID"`
+	Success        bool   `json:"success"`
+	ErrorID        int    `json:"errorId"`
+}
 
+type ItemMoveResponseData struct {
+	MovedItems []MovedItem `json:"movedItems"`
+}
 
+type ItemMoveResponse struct {
+	RespondMessageBase
+	ItemMoveResponseData ItemMoveResponseData `json:"data"`
+}
 
+type ArtMeshSelectionRequestData struct {
+	TextOverride          string   `json:"textOverride"`
+	HelpOverride          string   `json:"helpOverride"`
+	RequestedArtMeshCount int      `json:"requestedArtMeshCount"`
+	ActiveArtMeshes       []string `json:"activeArtMeshes"`
+}
 
+type ArtMeshSelectionRequest struct {
+	RequestMessageBase
+	ArtMeshSelectionRequestData ArtMeshSelectionRequestData `json:"data"`
+}
 
+type ArtMeshSelectionResponseData struct {
+	Success           bool     `json:"success"`
+	ActiveArtMeshes   []string `json:"activeArtMeshes"`
+	InactiveArtMeshes []string `json:"inactiveArtMeshes"`
+}
+
+type ArtMeshSelectionResponse struct {
+	RespondMessageBase
+	ArtMeshSelectionResponseData ArtMeshSelectionResponseData `json:"data"`
+}
+
+type PinInfo struct {
+	ModelID       string  `json:"modelID"`
+	ArtMeshID     string  `json:"artMeshID"`
+	Angle         float32 `json:"angle"`
+	Size          float32 `json:"size"`
+	VertexID1     int     `json:"vertexID1"`
+	VertexID2     int     `json:"vertexID2"`
+	VertexID3     int     `json:"vertexID3"`
+	VertexWeight1 float32 `json:"vertexWeight1"`
+	VertexWeight2 float32 `json:"vertexWeight2"`
+	VertexWeight3 float32 `json:"vertexWeight3"`
+}
+
+type ItemPinRequestData struct {
+	Pin             bool    `json:"pin"`
+	ItemInstanceID  string  `json:"itemInstanceID"`
+	AngleRelativeTo string  `json:"angleRelativeTo"`
+	SizeRelativeTo  string  `json:"sizeRelativeTo"`
+	VertexPinType   string  `json:"vertexPinType"`
+	PinInfo         PinInfo `json:"pinInfo"`
+}
+
+type ItemPinRequest struct {
+	RequestMessageBase
+	ItemPinRequestData ItemPinRequestData `json:"data"`
+}
+type ItemPinRequestResponseData struct {
+	IsPinned       bool   `json:"IsPinned"`
+	ItemInstanceID string `json:"itemInstanceID"`
+	ItemFileName   string `json:"itemFileName"`
+}
+
+type ItemPinResponse struct {
+	RespondMessageBase
+	ItemAnimationControlResponseData ItemAnimationControlResponseData `json:"data"`
+}
+
+type PostProcessingListRequestData struct {
+	FillPostProcessingPresetArray  bool     `json:"fillPostProcessingPresetArray"`
+	FillPostProcessingEffectsArray bool     `json:"fillPostProcessingEffectsArray"`
+	EffectIDFilter                 []string `json:"effectIDFilter"`
+}
+
+type PostProcessingListRequest struct {
+	RequestMessageBase
+	PostProcessingListRequestData PostProcessingListRequestData `json:"data"`
+}
+
+type ConfigEntry struct {
+	InternalID       string  `json:"internalID"`
+	EnumID           string  `json:"enumID"`
+	Explanation      string  `json:"explanation"`
+	Type             string  `json:"type"`
+	ActivationConfig bool    `json:"activationConfig"`
+	FloatValue       float64 `json:"floatValue"`
+	FloatMin         float32 `json:"floatMin"`
+	FloatMax         float32 `json:"floatMax"`
+	FloatDefault     float32 `json:"floatDefault"`
+	IntValue         int     `json:"intValue"`
+	IntMin           int     `json:"intMin"`
+	IntMax           int     `json:"intMax"`
+	IntDefault       int     `json:"intDefault"`
+	ColorValue       string  `json:"colorValue"`
+	ColorDefault     string  `json:"colorDefault"`
+	ColorHasAlpha    bool    `json:"colorHasAlpha"`
+	BoolValue        bool    `json:"boolValue"`
+	BoolDefault      bool    `json:"boolDefault"`
+	StringValue      string  `json:"stringValue"`
+	StringDefault    string  `json:"stringDefault"`
+	SceneItemValue   string  `json:"sceneItemValue"`
+	SceneItemDefault string  `json:"sceneItemDefault"`
+}
+
+type PostProcessingEffect struct {
+	InternalID         string        `json:"internalID"`
+	EnumID             string        `json:"enumID"`
+	Explanation        string        `json:"explanation"`
+	EffectIsActivated  bool          `json:"effectIsActivated"`
+	EffectIsRestricted bool          `json:"effectIsRestricted"`
+	ConfigEntries      []ConfigEntry `json:"configEntries"`
+}
+
+type PostProcessingListResponseData struct {
+	PostProcessingSupported                    bool                   `json:"PostProcessingSupported"`
+	PostProcessingActive                       bool                   `json:"PostProcessingActive"`
+	CanSendPostProcessingUpdateRequestRightNow bool                   `json:"CanSendPostProcessingUpdateRequestRightNow"`
+	RestrictedEffectsAllowed                   bool                   `json:"RestrictedEffectsAllowed"`
+	PresetIsActive                             bool                   `json:"PresetIsActive"`
+	ActivePReset                               string                 `json:"ActivePReset"`
+	PresetCount                                int                    `json:"PresetCount"`
+	ActiveEffectCount                          int                    `json:"ActiveEffectCount"`
+	EffectCountBeforeFilter                    int                    `json:"EffectCountBeforeFilter"`
+	ConfigCountBeforeFilter                    int                    `json:"ConfigCountBeforeFilter"`
+	EffectCountAfterFilter                     int                    `json:"EffectCountAfterFilter"`
+	ConfigCountAfterFilter                     int                    `json:"ConfigCountAfterFilter"`
+	PostProcessingEffects                      []PostProcessingEffect `json:"PostProcessingEffects"`
+	PostProcessingPresets                      []string               `json:"PostProcessingPresets"`
+}
+
+type PostProcessingListResponse struct {
+	RespondMessageBase
+	PostProcessingListResponseData PostProcessingListResponseData `json:"data"`
+}
+
+type PostProcessingValues struct {
+	ConfigID    string  `json:"configID"`
+	ConfigValue float32 `json:"configValue"`
+}
+
+type PostProcessingUpdateRequestData struct {
+	PostProcessingOn           bool                   `json:"postProcessingOn"`
+	SetPostProcessingPReset    bool                   `json:"setPostProcessingPReset"`
+	SetPostProcessingValues    bool                   `json:"setPostProcessingValues"`
+	PresetToSet                string                 `json:"presetToSet"`
+	PostProcessingFadeTime     float32                `json:"postProcessingFadeTime"`
+	SetAllOtherValuesToDefault bool                   `json:"setAllOtherValuesToDefault"`
+	UsingRestrictedEffects     bool                   `json:"UsingRestrictedEffects"`
+	RandomizeAll               bool                   `json:"randomizeAll"`
+	RandomizeAllChaosLevel     float32                `json:"randomizeAllChaosLevel"`
+	PostProcessingValues       []PostProcessingValues `json:"postProcessingValues"`
+}
+
+type PostProcessingUpdateRequest struct {
+	RequestMessageBase
+	PostProcessingUpdateRequestData PostProcessingUpdateRequestData `json:"data"`
+}
+
+type PostProcessingUpdateResponseData struct {
+	PostProcessingActive bool   `json:"PostProcessingActive"`
+	PresetIsActive       bool   `json:"PresetIsActive"`
+	ActivePReset         string `json:"ActivePReset"`
+	ActiveEffectCount    int    `json:"ActiveEffectCount"`
+}
+
+type PostProcessingUpdateResponse struct {
+	RespondMessageBase
+	PostProcessingUpdateResponseData PostProcessingUpdateResponseData `json:"data"`
+}
