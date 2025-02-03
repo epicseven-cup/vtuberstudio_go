@@ -234,3 +234,391 @@ type CurrentModelResponse struct {
 	RespondMessageBase
 	CurrentModelResponseData CurrentModelResponseData `json:"data"`
 }
+
+type AvailableModelsRequest struct {
+	RequestMessageBase
+}
+
+type AvailableModelsResponseData struct {
+	NumberOfModels  uint16 `json:"numberOfModels"`
+	AvailableModels Model  `json:"availableModels"`
+}
+
+type AvailableModelsResponse struct {
+	RespondMessageBase
+	AvailableModelsResponseData AvailableModelsResponseData `json:"data"`
+}
+
+type ModelLoadedRequestData struct {
+	ModelID string `json:"modelID"`
+}
+
+type ModelLoadedRequest struct {
+	RequestMessageBase
+	ModelLoadedRequestData ModelLoadedRequestData `json:"data"`
+}
+
+type ModelLoadedResponseData struct {
+	ModelID string `json:"modelID"`
+}
+
+type ModelLoadedResponse struct {
+	RespondMessageBase
+	ModelLoadedResponseData ModelLoadedResponseData `json:"data"`
+}
+
+type MoveModelRequestData struct {
+	TimeInSeconds            float32 `json:"timeInSeconds"`
+	ValuesAreRelativeToModel bool    `json:"valuesAreRelativeToModel"`
+	PositionX                float32 `json:"positionX"`
+	PositionY                float32 `json:"positionY"`
+	Rotation                 float32 `json:"rotation"`
+	Size                     float32 `json:"size"`
+}
+
+type MoveModelRespondData struct {
+}
+
+type MoveModelRequest struct {
+	RequestMessageBase
+	MoveModelRequestData MoveModelRequestData `json:"data"`
+}
+
+type MoveModelResponse struct {
+	RespondMessageBase
+	ModelLoadedResponseData ModelLoadedResponseData `json:"data"`
+}
+
+type HotkeyInCurrentModelRequestData struct {
+	ModelID            string `json:"modelID"`
+	Live2DItemFileName string `json:"live2DItemFileName"`
+}
+
+type HotkeysInCurrentModelRequest struct {
+	RequestMessageBase
+}
+
+type HotkeysInCurrentModelResponseData struct {
+	ModelLoaded      bool     `json:"modelLoaded"`
+	ModelName        string   `json:"modelName"`
+	ModelID          string   `json:"modelID"`
+	AvailableHotKeys []HotKey `json:"availableHotKeys"`
+}
+
+type HotkeysInCurrentModelResponse struct {
+	RespondMessageBase
+	HotkeysInCurrentModelResponseData HotkeysInCurrentModelResponseData `json:"data"`
+}
+
+type HotkeyTriggerRequestData struct {
+	HotkeyID       string `json:"hotkeyID"`
+	ItemInstanceID string `json:"itemInstanceID"`
+}
+
+type HotkeyTriggerRequest struct {
+	RequestMessageBase
+	HotkeyTriggerRequestData HotkeyTriggerRequestData `json:"data"`
+}
+
+type HotkeyTriggerResponseData struct {
+	HotkeyID string `json:"hotkeyID"`
+}
+
+type HotkeyTriggerResponse struct {
+	RespondMessageBase
+	HotkeyTriggerResponseData HotkeyTriggerResponseData `json:"data"`
+}
+
+type ExpressionStateRequestData struct {
+	Details bool `json:"details"`
+	Expression string `json:"expression"`
+}
+type ExpressionStateRequest struct {
+	RequestMessageBase
+	ExpressionStateRequestData ExpressionStateRequestData `json:"data"`
+}
+
+type ExpressionStateResponseData struct {
+	ModelLoaded bool `json:"modelLoaded"`
+	ModelName   string `json:"modelName"`
+	ModelID     string `json:"modelID"`
+	Expressions []Expression `json:"expressions"`
+}
+
+type ExpressionStateResponse struct {
+	RespondMessageBase
+	ExpressionStateResponseData ExpressionStateResponseData `json:"data"`
+}
+
+type ExpressionActivationRequestData struct {
+	ExpressionFile string `json:"expressionFile"`
+	FadeTime        float32 `json:"fadeTime"`
+	Active          bool    `json:"active"`
+}
+
+type ExpressionActivationRequest struct {
+	RequestMessageBase
+	ExpressionActivationRequestData ExpressionActivationRequestData `json:"data"`
+}
+
+type ExpressionActivationResponseData struct {}
+
+type ExpressionActivationResponse struct {
+	RespondMessageBase
+	ExpressionActivationResponseData ExpressionActivationResponseData `json:"data"`
+}
+
+type ArtMeshListRequest struct {
+	RequestMessageBase
+}
+
+type ArtMeshListResponseData struct {
+	ModelLoaded bool `json:"modelLoaded"`
+	NumberOfArtMeshNames uint16 `json:"numberOfArtMeshNames"`
+	NumberOfArtMeshTags uint16 `json:"numberOfArtMeshTags"`
+	ArtMeshNames []string `json:"artMeshNames"`
+	ArtMeshTags []string `json:"artMeshTags"`
+}
+
+type ArtMeshListResponse struct {
+	RespondMessageBase
+	ArtMeshListResponseData ArtMeshListResponseData `json:"data"`
+}
+
+type ColorTint {
+	ColorR uint8 `json:"colorR"`
+	ColorG uint8 `json:"colorG"`
+	ColorB uint8 `json:"colorB"`
+	ColorA uint8 `json:"colorA"`
+	MixWithSceneLightingColor uint8 `json:"mixWithSceneLightingColor"`
+}
+
+type ArtMeshMatcher struct{
+	TintAll bool `json:"tintAll"`
+	ArtMeshNumber []uint8 `json:"artMeshNumber"`
+	NameExact []string `json:"nameExact"`
+	TagExact []string `json:"tagExact"`
+	TagContains []string `json:"tagContains"`
+}
+
+type ColorTintRequestData struct{
+	ColorTint ColorTint  `json:"colorTint"`
+	ArtMeshMatcher ArtMeshMatcher `json:"artMeshMatcher"`
+}
+
+type ColorTintRequest struct {
+	RequestMessageBase
+	ColorTintRequestData ColorTintRequestData `json:"data"`
+}
+
+type ColorTintResponseData struct{
+	MatchedArtMeshes uint8 `json:"matchedArtMeshes"`
+}
+
+type ColorTintResponse struct {
+	RespondMessageBase
+	ColorTintResponseData ColorTintResponseData `json:"data"`
+}
+
+type SceneColorOverlayInfoRequest struct{
+	RequestMessageBase
+}
+
+type CapturePart struct{
+	Active bool `json:"active"`
+	ColorR uint8 `json:"colorR"`
+	ColorG uint8 `json:"colorG"`
+	ColorB uint8 `json:"colorB"`
+}
+
+type SceneColorOverlayInfoResponseData struct{
+	Active bool `json:"active"`
+	ItemsIncluded bool `json:"itemsIncluded"`
+	IsWindowCapture bool `json:"isWindowCapture"`
+	BaseBrightness uint16 `json:"baseBrightness"`
+	ColorBoost uint16 `json:"colorBoost"`
+	Smoothing uint16 `json:"smoothing"`
+	ColorOverlayR uint16 `json:"colorOverlayR"`
+	ColorOverlayG uint16 `json:"colorOverlayG"`
+	ColorOverlayB uint16 `json:"colorOverlayB"`
+	LeftCapturePart CapturePart `json:"leftCapturePart"`
+	MiddleCapturePart CapturePart `json:"middleCapturePart"`
+	RightCapturePart CapturePart `json:"rightCapturePart"`
+
+}
+
+type SceneColorOverlayInfoResponse struct {
+	RespondMessageBase
+	SceneColorOverlayInfoResponse SceneColorOverlayInfoResponseData `json:"data"`
+}
+
+
+type FaceFoundRequest struct{
+	RequestMessageBase
+}
+
+type FaceFoundResponseData struct {
+	Found bool `json:"found"`
+}
+
+type FaceFoundResponse struct {
+	RespondMessageBase
+	FaceFoundResponseData FaceFoundResponseData `json:"data"`
+}
+
+type InputParameterListRequest struct{
+	RequestMessageBase
+}
+
+type Parameter struct{
+	Name string `json:"name"`
+	AddedBy string `json:"addedBy"`
+	Value int `json:"value"`
+	Min int `json:"min"`
+	Max int `json:"max"`
+	DefaultValue int `json:"defaultValue"`
+}
+
+
+type InputParameterListResponseData struct{
+	ModelLoaded bool `json:"modelLoaded"`
+	ModelName string `json:"modelName"`
+	ModelID string `json:"modelID"`
+	CustomParameters []Parameter `json:"customParameters"`
+	DefaultParameters []Parameter `json:"defaultParameters"`
+}
+
+type InputParameterListResponse struct{
+	RespondMessageBase
+	InputParameterListResponseData InputParameterListResponseData`json:"data"`
+}
+
+
+type ParameterValueRequestData struct{
+	Name string `json:"name"`
+}
+
+type ParameterValueRequest struct{
+	RequestMessageBase
+	ParameterValueRequestData ParameterValueRequestData `json:"data"`
+}
+
+type ParameterValueResponseData struct{
+	Name string `json:"name"`
+	AddedBy string `json:"addedBy"`
+	Value int `json:"value"`
+	Min int `json:"min"`
+	Max int `json:"max"`
+	DefaultValue int `json:"defaultValue"`
+}
+
+type ParameterValueResponse struct{
+	RespondMessageBase
+	ParameterValueResponseData ParameterValueResponseData `json:"data"`
+}
+
+
+type Live2DParameterListRequest struct{
+	RequestMessageBase
+}
+
+
+type Live2DParameterListResponseData struct{
+	ModelLoaded bool `json:"modelLoaded"`
+	ModelName string `json:"modelName"`
+	ModelID string `json:"modelID"`
+	Parameters []Parameter `json:"parameters"`
+
+}
+
+type Live2DParameterListResponse struct{
+	RespondMessageBase
+	Live2DParameterListResponseData Live2DParameterListResponseData `json:"data"`
+}
+
+
+type ParameterCreationRequestData struct{
+	ParameterName string `json:"parameterName"`
+	Explanation string `json:"explanation"`
+	Min int `json:"min"`
+	Max int `json:"max"`
+	DefaultValue int `json:"defaultValue"`
+}
+
+type ParameterCreationRequest struct {
+	RequestMessageBase
+	ParameterCreationRequestData ParameterCreationRequestData `json:"data"`
+}
+
+type ParameterCreationResponseData struct{
+	ParameterName string `json:"parameterName"`
+}
+
+type ParameterCreationResponse struct{
+	RespondMessageBase
+	ParameterCreationResponseData ParameterCreationResponseData `json:"data"`
+}
+
+
+
+type ParameterDeletionRequestData struct{
+	ParameterName string `json:"parameterName"`
+}
+
+type ParameterDeletionRequest struct{
+	RequestMessageBase
+	ParameterDeletionRequestData ParameterDeletionRequestData `json:"data"`
+}
+
+type ParameterDeletionResponseData struct{
+	ParameterName string `json:"parameterName"`
+}
+
+type ParameterDeletionResponse struct{
+	RespondMessageBase
+	ParameterDeletionResponseData ParameterDeletionResponseData `json:"data"`
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
