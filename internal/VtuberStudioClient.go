@@ -24,7 +24,7 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 
 	status := make(chan bool, 1)
 	receiver := make(chan []byte, 1)
-	outgoing := make(chan []byte, 1)
+	outgoing := make(chan interface{}, 1)
 
 	go func() {
 		for {
