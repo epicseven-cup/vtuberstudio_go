@@ -4,13 +4,14 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"net/url"
+	"os"
 )
 
 type VtuberStudioClient struct {
 	url      *url.URL
 	status   chan bool
 	receiver chan []byte
-	outgoing chan []byte
+	outgoing chan interface{}
 }
 
 func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
@@ -37,7 +38,22 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 			receiver <- message
 		}
 
-	}
+	}()
+
+	go func() {
+		for {
+			select {
+			case <-status:
+				os.Exit(0)
+			case message := <-outgoing:
+				log.Printf("Sending message: %s", message)
+				err := conn.WriteJSON(message)
+				if err != nil {
+					return
+				}
+			}
+		}
+	}()
 
 	return &VtuberStudioClient{
 		url:      &url,
