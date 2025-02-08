@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
@@ -29,6 +30,14 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 	receiver := make(chan []byte, 1)
 	outgoing := make(chan interface{}, 1)
 
+	client := &VtuberStudioClient{
+		url:      &url,
+		status:   status,
+		receiver: receiver,
+		outgoing: outgoing,
+		handler:  map[string]Handler{},
+	}
+
 	go func() {
 		for {
 			amount, message, err := conn.ReadMessage()
@@ -38,7 +47,19 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 			log.Printf("Received message: %s", message)
 			log.Printf("Message size: %d", amount)
 
-			receiver <- message
+			response := RespondMessageBase{}
+			err = json.Unmarshal(message, &response)
+
+			if err != nil {
+				log.Fatalf("json unmarshal error: %v", err)
+			}
+
+			handler, ok := client.handler[response.MessageType]
+
+			if ok {
+				handler.handler()
+			}
+
 		}
 
 	}()
@@ -58,12 +79,7 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 		}
 	}()
 
-	return &VtuberStudioClient{
-		url:      &url,
-		status:   status,
-		receiver: receiver,
-		outgoing: outgoing,
-	}
+	return client
 }
 
 func (v *VtuberStudioClient) Close() {
