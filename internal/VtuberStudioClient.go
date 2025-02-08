@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"fmt"
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"log"
 	"net/url"
@@ -12,6 +14,7 @@ type VtuberStudioClient struct {
 	status   chan bool
 	receiver chan []byte
 	outgoing chan interface{}
+	handler  map[string]Handler
 }
 
 func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
@@ -61,4 +64,40 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 		receiver: receiver,
 		outgoing: outgoing,
 	}
+}
+
+func (v *VtuberStudioClient) Close() {
+	// Bad close, I need to sleep
+	v.status <- true
+}
+
+func (v *VtuberStudioClient) AddHandler(messageType string, handler Handler) error {
+	_, ok := v.handler[messageType]
+	if ok {
+		return fmt.Errorf("handler for message type %s already exists", messageType)
+	}
+	v.handler[messageType] = handler
+	return nil
+}
+
+func (v *VtuberStudioClient) SendMessage(m interface{}) {
+	v.outgoing <- m
+}
+
+func (v *VtuberStudioClient) AuthenticatePlugin(name string, developerName string, iconBase64 string) {
+
+	m := AuthenticationRequest{
+		RequestMessageBase: RequestMessageBase{
+			ApiName:     API_NAME,
+			ApiVersion:  API_VERSION,
+			RequestID:   uuid.New().String(),
+			MessageType: "AuthenticationTokenRequest",
+		},
+		AuthenticationRequestData: AuthenticationRequestData{
+			PluginName:      name,
+			PluginDeveloper: developerName,
+			PluginIcon:      iconBase64,
+		},
+	}
+	v.SendMessage(m)
 }
