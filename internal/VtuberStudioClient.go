@@ -18,7 +18,7 @@ type VtuberStudioClient struct {
 	handler  map[string]Handler
 }
 
-func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
+func NewVtuberStudioClient(url url.URL) (*VtuberStudioClient, error) {
 
 	log.Printf("Connecting to %v", url)
 	conn, _, err := websocket.DefaultDialer.Dial(url.String(), nil)
@@ -57,7 +57,11 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 			handler, ok := client.handler[response.MessageType]
 
 			if ok {
-				handler.handler()
+				err := handler.Handle()
+				if err != nil {
+					log.Fatalf("handler error: %v", err)
+					return
+				}
 			}
 
 		}
@@ -79,7 +83,7 @@ func NewVtuberStudioClient(url url.URL) *VtuberStudioClient {
 		}
 	}()
 
-	return client
+	return client, nil
 }
 
 func (v *VtuberStudioClient) Close() {
