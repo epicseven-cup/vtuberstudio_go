@@ -47,13 +47,6 @@ func NewVtuberStudioClient(url url.URL) (*VtuberStudioClient, error) {
 			log.Printf("Received message: %s", message)
 			log.Printf("Message size: %d", amount)
 
-			response := RespondMessageBase{}
-			err = json.Unmarshal(message, &response)
-
-			if err != nil {
-				log.Fatalf("json unmarshal error: %v", err)
-			}
-
 			handler, ok := client.handler[response.MessageType]
 
 			if ok {
