@@ -5,6 +5,29 @@ import (
 	"log"
 )
 
+var messageMapping = map[string]interface{} {
+	"VTubeStudioAPIStateBroadcast": StatusRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"APIError" : AuthenticationRequest{},
+	"AuthenticationRequest" : AuthenticationRequest{},
+	"StatisticsRequest" : AuthenticationRequest{},
+	"VTSFolderInfoRequest" : AuthenticationRequest{},
+	"CurrentModelRequest" : AuthenticationRequest{},
+	"AvailableModelsRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+	"AuthenticationTokenRequest" : AuthenticationRequest{},
+}
+
 //https://stackoverflow.com/questions/47911187/golang-elegantly-json-decode-different-structures
 
 /*
