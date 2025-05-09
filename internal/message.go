@@ -104,10 +104,6 @@ type Data struct {
 	ExpressionFile              string        `json:"expressionFile,omitempty"`
 	Expressions                 []Expression  `json:"expressions,omitempty"`
 	FadeTime                    float32       `json:"fadeTime,omitempty"`
-	// Only finish until expression
-	// Have not started ArtMeshes with color selection
-	// Need to reorg this struct later, to be respond to request
-	// for now I'm only using expression anyways
 }
 
 type Message struct {
